@@ -58,7 +58,9 @@ module Paperclip
 
         parameters = parameters.flatten.compact.join(" ").strip.squeeze(" ")
 
-        success = Paperclip.run("convert", parameters, :source => "#{File.expand_path(src.path)}[0]", :dest => File.expand_path(dst.path))
+        # NOTE: [md12] Thumbnail generation from TIFF files is return an exit status of 1, this should be removed
+        # once the version of ImageMagick has been updated
+        success = Paperclip.run("convert", parameters, :source => "#{File.expand_path(src.path)}[0]", :dest => File.expand_path(dst.path), :expected_outcodes => [0,1])
       rescue PaperclipCommandLineError => e
         raise PaperclipError, "There was an error processing the thumbnail for #{@basename}" if @whiny
       end
