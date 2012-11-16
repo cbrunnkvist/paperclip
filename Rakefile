@@ -81,7 +81,7 @@ end
 
 namespace :tddium do
   desc "Post-setup for Tddium.com"
-  task :post_hook do
+  task :worker_hook do
     puts "Look ma', Iz got post_hook"
     # system("bundle exec rake appraisal:install")
     Rake::Task["appraisal:install"].invoke
