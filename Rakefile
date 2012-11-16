@@ -78,3 +78,12 @@ desc "Build the gem into the current directory"
 task :gem => :gemspec do
   `gem build #{spec.name}.gemspec`
 end
+
+namespace :tddium do
+  desc "Post-setup for Tddium.com"
+  task :post_hook do
+    puts "Look ma', Iz got post_hook"
+    # system("bundle exec rake appraisal:install")
+    Rake::Task["appraisal:install"].invoke
+  end
+end
