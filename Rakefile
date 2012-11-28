@@ -79,11 +79,5 @@ task :gem => :gemspec do
   `gem build #{spec.name}.gemspec`
 end
 
-namespace :tddium do
-  desc "Post-setup for Tddium.com"
-  task :post_hook do
-    puts "Look ma', Iz got post_hook"
-    system("bundle exec rake appraisal:install") || true # begin.rescue.end
-    # Rake::Task["appraisal:install"].invoke
-  end
-end
+
+task "tddium:pre_hook" => "appraisal:install"
